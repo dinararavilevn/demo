@@ -57,13 +57,13 @@ df = pd.DataFrame (data, columns = ['state','area','rooms', 'level', 'levels', '
 
 #Добавляем координаты по субъекту
 df_with_coordinates = pd.merge(df, coordinates.loc[coordinates.state==a][['geo_lat', 'geo_lon', 'state']], on='state').drop('state', axis=1)
-st.write(df_with_coordinates)
+
 
 #Добавляем временной признак
 now = datetime.datetime.now()
 first_date = datetime.datetime(2018, 2, 19)
 df_with_coordinates['day_delta'] = (now - first_date).days
-
+st.write(df_with_coordinates)
 #Нормализуем числовые признаки
 nums = df_with_coordinates.drop(['object_type', 'building_type'], axis=1) 
 scaler = RobustScaler()
