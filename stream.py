@@ -65,12 +65,12 @@ df_with_coordinates['day_delta'] = (now - first_date).days
 
 st.write(df_with_coordinates)
 
-num_features = df_with_coordinates.drop(['Тип постройки', 'Тип дома'], axis=1) 
-st.write(num_features)
+nums = df_with_coordinates.drop(['Тип постройки', 'Тип дома'], axis=1) 
+st.write(nums)
 
 #Нормализуем числовые признаки
 scaler = RobustScaler()
-scaled_nums = scaler.get_scaled_data(num_features)
+scaled_nums = scaler.get_scaled_data(nums)
 df_scaled_nums = pd.DataFrame(scaled_nums)
 st.write(scaled_nums)
 ready_df = pd.concat([df_scaled_nums, df_with_coordinates['Тип дома'], df_with_coordinates['Тип постройки']], axis=1)
