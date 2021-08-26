@@ -82,7 +82,7 @@ prediction = model.predict_price(ready_df)
 
 if st.button('Узнать рекомендованную стоимость'):
     st.markdown('**Рекомендованная цена квартиры**')
-    st.subheader(np.round(prediction[0]))
+    st.subheader(np.round(np.exp(prediction[0])))
 else:
     st.write('Нажмите на кнопку, чтобы рассчитать стоимость!')
 
