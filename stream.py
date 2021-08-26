@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from model import LightGBM
+from cat_model import CatBoostRegressor
 from scaler import RobustScaler
 
 coordinates = pd.read_csv('coordinates.csv')
@@ -28,9 +28,6 @@ else:
     d = 6
     e = 12
     f = 10
-#submit_button = st.button('Узнать рекомендованную стоимость')
-
-
 
 st.sidebar.markdown('Выберите тип постройки')
 select_object_type = st.sidebar.radio('', ('Вторичное жилье', 'Новостройка'))
@@ -59,16 +56,19 @@ df = pd.DataFrame (data, columns = ['state','Общая площадь','Кол�
 
 #Добавляем координаты по субъекту
 df_with_coordinates = pd.merge(df, coordinates.loc[coordinates.state==a][['geo_lat', 'geo_lon', 'state']], on='state').drop('state', axis=1)
-nums = df_with_coordinates.drop(['Тип постройки', 'Тип дома'], axis=1) 
+num_features = df_with_coordinates.drop(['Тип постройки', 'Тип дома'], axis=1) 
+cat_features = ['Тип постройки', 'Тип дома']
 
 #Нормализуем числовые признаки
 scaler = RobustScaler()
 scaled_nums = scaler.get_scaled_data(nums)
 df_scaled_nums = pd.DataFrame(scaled_nums)
 
-ready_df = pd.concat([df_scaled_nums, df_with_coordinates['Тип дома'], df_with_coordinates['Тип постройки']], axis=1)
+#ready_df = pd.concat([df_scaled_nums, df_with_coordinates['Тип дома'], df_with_coordinates['Тип постройки']], axis=1)
+ready_df = pd.concat([df_scaled_nums, df_with_coordinates[cat_features]], axis=1)
 
-model = LightGBM()
+#model = LightGBM()
+model = CatBoostRegressor()
 prediction = model.predict_price(ready_df)
 
 if st.button('Узнать рекомендованную стоимость'):
