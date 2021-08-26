@@ -58,11 +58,9 @@ df = pd.DataFrame (data, columns = ['state','Общая площадь','Кол�
 #Добавляем координаты по субъекту
 df_with_coordinates = pd.merge(df, coordinates.loc[coordinates.state==a][['geo_lat', 'geo_lon', 'state']], on='state').drop('state', axis=1)
 
-st.write(df_with_coordinates)
-#st.write(datetime.now().date())
 now = datetime.datetime.now()
 first_date = datetime.datetime(2018, 2, 19)
-df_with_coordinates = pd.concat([df_with_coordinates, (now - first_date).days], axis=1)
+df_with_coordinates['day_delta'] = (now - first_date).days
 st.write(df_with_coordinates)
 num_features = df_with_coordinates.drop(['Тип постройки', 'Тип дома'], axis=1) 
 #cat_features = ['Тип постройки', 'Тип дома']
