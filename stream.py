@@ -29,7 +29,7 @@ else:
     d = 6
     e = 12
     f = 10
-submit_button = st.form_submit_button('Узнать рекомендованную стоимость')
+submit_button = st.submit_button('Узнать рекомендованную стоимость')
 
 
 
