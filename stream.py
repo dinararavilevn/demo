@@ -25,7 +25,7 @@ if show_data == True:
     d = st.text_area('Этаж: ', '5')
     e = st.text_area('Этажность дома: ', '10')
     f = st.text_area('Площадь кухни: ', '10')
- else:
+else:
     d = 6
     e = 12
     f = 10
