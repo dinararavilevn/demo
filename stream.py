@@ -72,7 +72,7 @@ st.write(num_features)
 scaler = RobustScaler()
 scaled_nums = scaler.get_scaled_data(num_features)
 df_scaled_nums = pd.DataFrame(scaled_nums)
-
+st.write(df_scaled_nums)
 ready_df = pd.concat([df_scaled_nums, df_with_coordinates['Тип дома'], df_with_coordinates['Тип постройки']], axis=1)
 #ready_df = pd.concat([df_scaled_nums, df_with_coordinates[cat_features]], axis=1)
 
