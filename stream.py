@@ -63,20 +63,13 @@ now = datetime.datetime.now()
 first_date = datetime.datetime(2018, 2, 19)
 df_with_coordinates['day_delta'] = (now - first_date).days
 
-st.write(df_with_coordinates)
-
-nums = df_with_coordinates.drop(['object_type', 'building_type'], axis=1) 
-st.write(nums)
-
 #Нормализуем числовые признаки
+nums = df_with_coordinates.drop(['object_type', 'building_type'], axis=1) 
 scaler = RobustScaler()
 scaled_nums = pd.DataFrame(scaler.get_scaled_data(nums))
-#df_scaled_nums = pd.DataFrame(scaled_nums)
-st.write(scaled_nums)
-ready_df = pd.concat([scaled_nums, df_with_coordinates['object_type'], df_with_coordinates['building_type']], axis=1)
-#ready_df = pd.concat([df_scaled_nums, df_with_coordinates[cat_features]], axis=1)
 
-#model = LightGBM()
+ready_df = pd.concat([scaled_nums, df_with_coordinates['object_type'], df_with_coordinates['building_type']], axis=1)
+
 model = CatBoostRegressor()
 prediction = model.predict_price(ready_df)
 
