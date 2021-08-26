@@ -73,7 +73,7 @@ scaler = RobustScaler()
 scaled_nums = pd.DataFrame(scaler.get_scaled_data(nums))
 #df_scaled_nums = pd.DataFrame(scaled_nums)
 st.write(scaled_nums)
-ready_df = pd.concat([df_scaled_nums, df_with_coordinates['Тип дома'], df_with_coordinates['Тип постройки']], axis=1)
+ready_df = pd.concat([scaled_nums, df_with_coordinates['Тип дома'], df_with_coordinates['Тип постройки']], axis=1)
 #ready_df = pd.concat([df_scaled_nums, df_with_coordinates[cat_features]], axis=1)
 
 #model = LightGBM()
