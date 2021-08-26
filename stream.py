@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+from datetime import datetime
 from cat_model import CatBoostRegressor
 from scaler import RobustScaler
 
@@ -56,6 +57,8 @@ df = pd.DataFrame (data, columns = ['state','Общая площадь','Кол�
 
 #Добавляем координаты по субъекту
 df_with_coordinates = pd.merge(df, coordinates.loc[coordinates.state==a][['geo_lat', 'geo_lon', 'state']], on='state').drop('state', axis=1)
+st.write(df_with_coordinates)
+datetime.now().date()
 num_features = df_with_coordinates.drop(['Тип постройки', 'Тип дома'], axis=1) 
 #cat_features = ['Тип постройки', 'Тип дома']
 
