@@ -71,7 +71,7 @@ ready_df = pd.concat([df_scaled_nums, df_with_coordinates['Тип дома'], df
 model = LightGBM()
 prediction = model.predict_price(ready_df)
 
-if submit_button = st.button('Узнать рекомендованную стоимость'):
+if st.button('Узнать рекомендованную стоимость'):
     st.markdown('**Рекомендованная цена квартиры**')
     st.subheader(np.round(prediction[0]))
 else:
