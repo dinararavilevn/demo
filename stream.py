@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from model import LightGBM
+from scaler import RobustScaler
 
 coordinates = pd.read_csv('coordinates.csv')
 
@@ -55,14 +56,21 @@ if select_building_type == 'Другое':
     h = 0
 
 
-data = {'state':  str(a), 'General square': int(b), 'Rooms': int(c), 'Level': int(d), 'Levels': int(e), 'Kitchen square': int(f), 'Object_type': int(g), 'Building type': int(h)}
-df = pd.DataFrame (data, columns = ['state','General square','Rooms', 'Level', 'Levels', 'Kitchen square', 'Object_type', 'Building type'], index=[0])
+data = {'state':  str(a), 'Общая площадь': int(b), 'Количество комнат': int(c), 'Этаж': int(d), 'Этажность дома': int(e), 'Площадь кухни': int(f), 'Тип постройки': int(g), 'Тип дома': int(h)}
+df = pd.DataFrame (data, columns = ['state','Общая площадь','Количество комнат', 'Этаж', 'Этажность дома', 'Площадь кухни', 'Тип постройки', 'Тип дома'], index=[0])
 
 #Добавляем координаты по субъекту
-
 df_with_coordinates = pd.merge(df, coordinates.loc[coordinates.state==a][['geo_lat', 'geo_lon', 'state']], on='state').drop('state', axis=1)
+nums = df_with_coordinates.drop(['Тип постройки', 'Тип дома'], axis=1) 
+
+#Нормализуем числовые признаки
+scaler = RobustScaler()
+scaled_nums = scaler.get_scaled_data(nums)
+df_scaled_nums = pd.DataFrame(scaled_nums)
+
+ready_df = pd.concat([df_scaled_nums, df_with_coordinates['Тип дома'], df_with_coordinates['Тип постройки']], axis=1)
 
 model = LightGBM()
-prediction = model.predict_price(df_with_coordinates)
+prediction = model.predict_price(ready_df)
 st.markdown('**Рекомендованная цена квартиры**')
 st.subheader(np.round(prediction[0]))
