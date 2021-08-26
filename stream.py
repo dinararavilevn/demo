@@ -11,8 +11,7 @@ st.markdown('**Это демонстрационный вариант**')
 st.markdown('Укажите параметры квартиры и узнайте ее стоимость')
 
 show_data = st.sidebar.checkbox('Все параметры')
-st.sidebar.info(
-    'Чем больше параметров вы укажете, тем точнее будет прогноз цены.')
+st.sidebar.info('Чем больше параметров вы укажете, тем точнее будет прогноз цены.')
 st.sidebar.info('Заполните форму **Дополнительные параметры**')
 
 #with st.form('form'):
@@ -29,7 +28,7 @@ else:
     d = 6
     e = 12
     f = 10
-submit_button = st.button('Узнать рекомендованную стоимость')
+#submit_button = st.button('Узнать рекомендованную стоимость')
 
 
 
@@ -71,5 +70,11 @@ ready_df = pd.concat([df_scaled_nums, df_with_coordinates['Тип дома'], df
 
 model = LightGBM()
 prediction = model.predict_price(ready_df)
-st.markdown('**Рекомендованная цена квартиры**')
-st.subheader(np.round(prediction[0]))
+
+if submit_button = st.button('Узнать рекомендованную стоимость'):
+    st.markdown('**Рекомендованная цена квартиры**')
+    st.subheader(np.round(prediction[0]))
+else:
+    st.write('Нажмите на кнопку, чтобы рассчитать стоимость!')
+
+
