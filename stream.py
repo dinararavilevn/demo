@@ -60,7 +60,9 @@ df_with_coordinates = pd.merge(df, coordinates.loc[coordinates.state==a][['geo_l
 
 st.write(df_with_coordinates)
 st.write(datetime.now().date())
-
+now = datetime.now().date()
+df_with_coordinates = pd.concat([df_with_coordinates, (pd.to_datetime(now) - data.date.min()).days], axis=1)
+st.write(df_with_coordinates)
 num_features = df_with_coordinates.drop(['Тип постройки', 'Тип дома'], axis=1) 
 #cat_features = ['Тип постройки', 'Тип дома']
 
