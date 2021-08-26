@@ -59,7 +59,7 @@ df = pd.DataFrame (data, columns = ['state','Общая площадь','Кол�
 df_with_coordinates = pd.merge(df, coordinates.loc[coordinates.state==a][['geo_lat', 'geo_lon', 'state']], on='state').drop('state', axis=1)
 
 st.write(df_with_coordinates)
-st.write(datetime.now().date())
+#st.write(datetime.now().date())
 now = datetime.datetime.now()
 first_date = datetime.date(2018, 2, 19)
 df_with_coordinates = pd.concat([df_with_coordinates, (now - first_date).days], axis=1)
