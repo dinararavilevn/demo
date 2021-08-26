@@ -71,7 +71,7 @@ scaled_nums = pd.DataFrame(scaler.get_scaled_data(nums))
 
 ready_df = pd.concat([scaled_nums, df_with_coordinates['object_type'], df_with_coordinates['building_type']], axis=1)
 
-model = CatBoostRegressor()
+model = LightGBM()
 prediction = model.predict_price(ready_df)
 
 if st.button('Узнать рекомендованную стоимость'):
