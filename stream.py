@@ -63,7 +63,7 @@ df_with_coordinates = pd.merge(df, coordinates.loc[coordinates.state==a][['geo_l
 now = datetime.datetime.now()
 first_date = datetime.datetime(2018, 2, 19)
 df_with_coordinates['day_delta'] = (now - first_date).days
-st.write(df_with_coordinates)
+
 #Нормализуем числовые признаки
 nums = df_with_coordinates.drop(['object_type', 'building_type'], axis=1) 
 scaler = RobustScaler()
@@ -74,7 +74,7 @@ ready_df = pd.concat([scaled_nums, df_with_coordinates['object_type'], df_with_c
 model = LightGBM()
 prediction = model.predict_price(ready_df)
 
-if st.button('**Узнать рекомендованную стоимость**'):
+if st.button('Узнать рекомендованную стоимость'):
     #st.markdown('**Рекомендованная цена квартиры**')
     st.subheader(np.round(np.exp(prediction[0])))
 else:
