@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import datetime
-from cat_model import CatBoostRegressor
+from model import LightGBM
 from scaler import RobustScaler
 
 coordinates = pd.read_csv('coordinates.csv')
