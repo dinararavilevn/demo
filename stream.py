@@ -61,7 +61,7 @@ cat_features = ['Тип постройки', 'Тип дома']
 
 #Нормализуем числовые признаки
 scaler = RobustScaler()
-scaled_nums = scaler.get_scaled_data(nums)
+scaled_nums = scaler.get_scaled_data(num_features)
 df_scaled_nums = pd.DataFrame(scaled_nums)
 
 #ready_df = pd.concat([df_scaled_nums, df_with_coordinates['Тип дома'], df_with_coordinates['Тип постройки']], axis=1)
