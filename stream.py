@@ -16,21 +16,20 @@ st.sidebar.info(
 st.sidebar.info('Заполните форму **Дополнительные параметры**')
 
 #with st.form('form'):
-    a = st.text_area('Субъект: ', 'Москва')
-    b = st.text_area('Общая площадь: ', '50')
-    c = st.text_area('Количество комнат: ', '2')
-    if show_data == True:
-        st.markdown('## Дополнительные параметры')
-        st.subheader(
-        'Укажите другие параметры квартиры:')
-        d = st.text_area('Этаж: ', '5')
-        e = st.text_area('Этажность дома: ', '10')
-        f = st.text_area('Площадь кухни: ', '10')
-    else:
-        d = 6
-        e = 12
-        f = 10
-    submit_button = st.form_submit_button('Узнать рекомендованную стоимость')
+a = st.text_area('Субъект: ', 'Москва')
+b = st.text_area('Общая площадь: ', '50')
+c = st.text_area('Количество комнат: ', '2')
+if show_data == True:
+    st.markdown('## Дополнительные параметры')
+    st.subheader('Укажите другие параметры квартиры:')
+    d = st.text_area('Этаж: ', '5')
+    e = st.text_area('Этажность дома: ', '10')
+    f = st.text_area('Площадь кухни: ', '10')
+ else:
+    d = 6
+    e = 12
+    f = 10
+ submit_button = st.form_submit_button('Узнать рекомендованную стоимость')
 
 
 
