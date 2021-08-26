@@ -30,7 +30,7 @@ else:
     e = 12
     f = 10
 
-st.sidebar.markdown('Выберите тип постройки')
+st.sidebar.markdown('Выберите вид жилья')
 select_object_type = st.sidebar.radio('', ('Вторичное жилье', 'Новостройка'))
 if select_object_type == 'Вторичное жилье':
     g = 1
@@ -52,8 +52,8 @@ if select_building_type == 'Другое':
     h = 0
 
 
-data = {'state':  str(a), 'Общая площадь': int(b), 'Количество комнат': int(c), 'Этаж': int(d), 'Этажность дома': int(e), 'Площадь кухни': int(f), 'Тип постройки': int(g), 'Тип дома': int(h)}
-df = pd.DataFrame (data, columns = ['state','Общая площадь','Количество комнат', 'Этаж', 'Этажность дома', 'Площадь кухни', 'Тип постройки', 'Тип дома'], index=[0])
+data = {'state':  str(a), 'area': int(b), 'rooms': int(c), 'level': int(d), 'levels': int(e), 'kitchen_area': int(f), 'object_type': int(g), 'building_type': int(h)}
+df = pd.DataFrame (data, columns = ['state','area','rooms', 'level', 'levels', 'kitchen_area', 'object_type', 'building_type'], index=[0])
 
 #Добавляем координаты по субъекту
 df_with_coordinates = pd.merge(df, coordinates.loc[coordinates.state==a][['geo_lat', 'geo_lon', 'state']], on='state').drop('state', axis=1)
@@ -65,7 +65,7 @@ df_with_coordinates['day_delta'] = (now - first_date).days
 
 st.write(df_with_coordinates)
 
-nums = df_with_coordinates.drop(['Тип постройки', 'Тип дома'], axis=1) 
+nums = df_with_coordinates.drop(['object_type', 'building_type'], axis=1) 
 st.write(nums)
 
 #Нормализуем числовые признаки
@@ -73,7 +73,7 @@ scaler = RobustScaler()
 scaled_nums = pd.DataFrame(scaler.get_scaled_data(nums))
 #df_scaled_nums = pd.DataFrame(scaled_nums)
 st.write(scaled_nums)
-ready_df = pd.concat([scaled_nums, df_with_coordinates['Тип дома'], df_with_coordinates['Тип постройки']], axis=1)
+ready_df = pd.concat([scaled_nums, df_with_coordinates['object_type'], df_with_coordinates['building_type']], axis=1)
 #ready_df = pd.concat([df_scaled_nums, df_with_coordinates[cat_features]], axis=1)
 
 #model = LightGBM()
