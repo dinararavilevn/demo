@@ -54,26 +54,25 @@ if select_building_type == 'Другое':
 
 
 data = {'state':  str(a), 'area': int(b), 'rooms': int(c), 'level': int(d), 'levels': int(e), 'kitchen_area': int(f), 'object_type': int(g), 'building_type': int(h)}
-df = pd.DataFrame (data, columns = ['state','area','rooms', 'level', 'levels', 'kitchen_area', 'object_type', 'building_type'], index=[0])
+df = pd.DataFrame (data, columns = ['city','area','rooms', 'level', 'levels', 'kitchen_area', 'object_type', 'building_type'], index=[0])
 
 #Добавляем координаты по субъекту
-df_with_coordinates = pd.merge(df, coordinates.loc[coordinates.state==a][['geo_lat', 'geo_lon', 'state']], on='state').drop('state', axis=1)
+#df_with_coordinates = pd.merge(df, coordinates.loc[coordinates.state==a][['geo_lat', 'geo_lon', 'state']], on='state').drop('state', axis=1)
 
-#df_with_cities_coo = pd.merge(df, cities.loc[cities.city==a][['geo_lat', 'geo_lon', 'city']], on='city').drop('city', axis=1)
-#df.loc[(df['city']=='Москва') | (df['region'] =='Москва')]
+df_with_cities_coo = pd.merge(df, cities.loc[cities.city==a][['geo_lat', 'geo_lon', 'city']], on='city').drop('city', axis=1)
 st.write(df_with_coordinates)
 
 #Добавляем временной признак
 now = datetime.datetime.now()
 first_date = datetime.datetime(2018, 2, 19)
-df_with_coordinates['day_delta'] = (now - first_date).days
+df_with_cities_coo['day_delta'] = (now - first_date).days
 
 #Нормализуем числовые признаки
-nums = df_with_coordinates.drop(['object_type', 'building_type'], axis=1) 
+nums = df_with_cities_coo.drop(['object_type', 'building_type'], axis=1) 
 scaler = RobustScaler()
 scaled_nums = pd.DataFrame(scaler.get_scaled_data(nums))
 
-ready_df = pd.concat([scaled_nums, df_with_coordinates['object_type'], df_with_coordinates['building_type']], axis=1)
+ready_df = pd.concat([scaled_nums, df_with_cities_coo['object_type'], df_with_cities_coo['building_type']], axis=1)
 
 model = LightGBM()
 prediction = model.predict_price(ready_df)
