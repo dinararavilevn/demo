@@ -60,6 +60,7 @@ df = pd.DataFrame (data, columns = ['city','area','rooms', 'level', 'levels', 'k
 #df_with_coordinates = pd.merge(df, coordinates.loc[coordinates.state==a][['geo_lat', 'geo_lon', 'state']], on='state').drop('state', axis=1)
 
 df_with_cities_coo = pd.merge(df, cities.loc[cities.city==a][['geo_lat', 'geo_lon', 'city']], on='city').drop('city', axis=1)
+#df.loc[(df['city']=='Москва') | (df['region'] =='Москва')]
 st.write(df_with_cities_coo)
 
 #Добавляем временной признак
