@@ -65,7 +65,7 @@ st.write(df_with_cities_coo)
 #Добавляем временной признак
 now = datetime.datetime.now()
 first_date = datetime.datetime(2018, 2, 19)
-df_with_coordinates['day_delta'] = (now - first_date).days
+#df_with_coordinates['day_delta'] = (now - first_date).days
 
 #Нормализуем числовые признаки
 nums = df_with_coordinates.drop(['object_type', 'building_type'], axis=1) 
