@@ -6,6 +6,7 @@ from model import LightGBM
 from scaler import RobustScaler
 
 coordinates = pd.read_csv('coordinates.csv')
+cities = pd.read_csv('cities.csv')
 
 st.title('Демо-версия сервиса по оценке квартир')
 st.markdown('**Это демонстрационный вариант**')
@@ -52,12 +53,14 @@ if select_building_type == 'Другое':
     h = 0
 
 
-data = {'state':  str(a), 'area': int(b), 'rooms': int(c), 'level': int(d), 'levels': int(e), 'kitchen_area': int(f), 'object_type': int(g), 'building_type': int(h)}
+data = {'city':  str(a), 'area': int(b), 'rooms': int(c), 'level': int(d), 'levels': int(e), 'kitchen_area': int(f), 'object_type': int(g), 'building_type': int(h)}
 df = pd.DataFrame (data, columns = ['state','area','rooms', 'level', 'levels', 'kitchen_area', 'object_type', 'building_type'], index=[0])
 
 #Добавляем координаты по субъекту
 df_with_coordinates = pd.merge(df, coordinates.loc[coordinates.state==a][['geo_lat', 'geo_lon', 'state']], on='state').drop('state', axis=1)
 
+df_with_cities_coo = pd.merge(df, cities.loc[cities.city==a][['geo_lat', 'geo_lon', 'city']], on='city').drop('city', axis=1)
+st.write(df_with_cities_coo)
 
 #Добавляем временной признак
 now = datetime.datetime.now()
