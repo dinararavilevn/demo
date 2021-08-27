@@ -6,7 +6,7 @@ from model import LightGBM
 from scaler import RobustScaler
 
 coordinates = pd.read_csv('coordinates.csv')
-cities = pd.read_csv('cities.csv')
+#cities = pd.read_csv('cities.csv')
 
 st.title('Демо-версия сервиса по оценке квартир')
 st.markdown('**Это демонстрационный вариант**')
@@ -61,7 +61,7 @@ df_with_coordinates = pd.merge(df, coordinates.loc[coordinates.state==a][['geo_l
 
 #df_with_cities_coo = pd.merge(df, cities.loc[cities.city==a][['geo_lat', 'geo_lon', 'city']], on='city').drop('city', axis=1)
 #df.loc[(df['city']=='Москва') | (df['region'] =='Москва')]
-#st.write(df_with_cities_coo)
+st.write(df_with_coordinates)
 
 #Добавляем временной признак
 now = datetime.datetime.now()
