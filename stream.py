@@ -65,14 +65,14 @@ st.write(df_with_cities_coo)
 #Добавляем временной признак
 now = datetime.datetime.now()
 first_date = datetime.datetime(2018, 2, 19)
-#df_with_coordinates['day_delta'] = (now - first_date).days
+df_with_cities_coo['day_delta'] = (now - first_date).days
 
 #Нормализуем числовые признаки
-nums = df_with_coordinates.drop(['object_type', 'building_type'], axis=1) 
+nums = df_with_cities_coo.drop(['object_type', 'building_type'], axis=1) 
 scaler = RobustScaler()
 scaled_nums = pd.DataFrame(scaler.get_scaled_data(nums))
 
-ready_df = pd.concat([scaled_nums, df_with_coordinates['object_type'], df_with_coordinates['building_type']], axis=1)
+ready_df = pd.concat([scaled_nums, df_with_cities_coo['object_type'], df_with_cities_coo['building_type']], axis=1)
 
 model = LightGBM()
 prediction = model.predict_price(ready_df)
