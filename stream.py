@@ -5,8 +5,8 @@ import datetime
 from model import LightGBM
 from scaler import RobustScaler
 
-coordinates = pd.read_csv('coordinates.csv')
-#cities = pd.read_csv('cities.csv')
+#coordinates = pd.read_csv('coordinates.csv')
+cities = pd.read_csv('cities.csv')
 
 st.title('Демо-версия сервиса по оценке квартир')
 st.markdown('**Это демонстрационный вариант**')
