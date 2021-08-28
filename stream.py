@@ -91,7 +91,6 @@ df_with_cities_coo = df_with_cities_coo.drop('city', axis=1)
 #nums = df_with_cities_coo.drop(['object_type', 'building_type'], axis=1) 
 #scaler = RobustScaler()
 #scaled_nums = pd.DataFrame(scaler.get_scaled_data(nums))
-
 #ready_df = pd.concat([scaled_nums, df_with_cities_coo['object_type'], df_with_cities_coo['building_type']], axis=1)
 
 model = LightGBM()
