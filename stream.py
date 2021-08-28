@@ -82,7 +82,7 @@ df_with_cities_coo.loc[df_with_cities_coo['city']=='Москва', 'expensive_re
 df_with_cities_coo.loc[df_with_cities_coo['city']=='Севастополь', 'expensive_region'] = 1
 df_with_cities_coo.loc[df_with_cities_coo['city']=='Санкт-Петербург', 'expensive_region'] = 1
 
-st.write(df_with_cities_coo)
+df_with_cities_coo = df_with_cities_coo.drop('city', axis=1)
 #Нормализуем числовые признаки
 #nums = df_with_cities_coo.drop(['object_type', 'building_type'], axis=1) 
 #scaler = RobustScaler()
