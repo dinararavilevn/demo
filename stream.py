@@ -53,7 +53,7 @@ if select_building_type == 'Другое':
     h = 0
 
 
-data = {'city':  str(a), 'area': int(b), 'rooms': int(c), 'level': int(d), 'levels': int(e), 'kitchen_area': int(f), 'object_type': int(g), 'building_type': int(h)}
+data = {'city':  str(a), 'area': float(b), 'rooms': int(c), 'level': int(d), 'levels': int(e), 'kitchen_area': float(f), 'object_type': int(g), 'building_type': int(h)}
 
 def add_feature(data):
     def calc_mean_room_area(data):
