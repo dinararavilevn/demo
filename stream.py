@@ -64,7 +64,6 @@ def add_feature(data):
     data['percent_of_level'] = data['level'] / data['levels']
     return data
 
-st.write(data)
 df = pd.DataFrame (data, columns = ['city','area','rooms', 'level', 'levels', 'kitchen_area', 'object_type', 'building_type'], index=[0])
 
 #Добавляем координаты по городу
@@ -75,6 +74,10 @@ df_with_cities_coo = pd.merge(df, cities.loc[cities.city==a][['geo_lat', 'geo_lo
 now = datetime.datetime.now()
 first_date = datetime.datetime(2018, 2, 19)
 df_with_cities_coo['day_delta'] = (now - first_date).days
+df_with_cities_coo['hour'] = now.hour
+df_with_cities_coo['year'] = now.year
+df_with_cities_coo = add_feature(df_with_cities_coo)
+st.write(df_with_cities_coo)
 
 #Нормализуем числовые признаки
 nums = df_with_cities_coo.drop(['object_type', 'building_type'], axis=1) 
