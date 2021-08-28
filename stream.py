@@ -70,7 +70,7 @@ df = pd.DataFrame (data, columns = ['city', 'state', 'area','rooms', 'level', 'l
 #Добавляем координаты по городу
 
 df_with_cities_coo = pd.merge(df, cities.loc[cities.city==a][['geo_lat', 'geo_lon', 'city']], on='city')
-df_with_cities_coo = pd.merge(df_with_cities_coo, coordinates.loc[coordinates.state==a][['regıon', 'state']], on='state').drop('state', axis=1)
+df_with_cities_coo = pd.merge(df_with_cities_coo, coordinates.loc[coordinates.state==a][['region', 'state']], on='state').drop('state', axis=1)
 
 st.write(df_with_cities_coo)
 #Добавляем временной признак
