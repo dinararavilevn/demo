@@ -77,7 +77,7 @@ df_with_cities_coo['day_delta'] = (now - first_date).days
 df_with_cities_coo['hour'] = now.hour
 df_with_cities_coo['year'] = now.year
 df_with_cities_coo = add_feature(df_with_cities_coo)
-st.write(df_with_cities_coo)
+
 
 #Нормализуем числовые признаки
 #nums = df_with_cities_coo.drop(['object_type', 'building_type'], axis=1) 
