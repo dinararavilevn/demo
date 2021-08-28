@@ -77,10 +77,11 @@ df_with_cities_coo['day_delta'] = (now - first_date).days
 df_with_cities_coo['hour'] = now.hour
 df_with_cities_coo['year'] = now.year
 df_with_cities_coo = add_feature(df_with_cities_coo)
-if df_with_cities_coo[(df_with_cities_coo['city']=='Севастополь') | (df_with_cities_coo['city']=='Москва') | (df_with_cities_coo['city']=='Санкт-Петербург')]:
-    df_with_cities_coo['expensive_region'] = 1
-else:
-    df_with_cities_coo['expensive_region'] = 0
+df_with_cities_coo['expensive_region'] = 0
+df_with_cities_coo.loc[df_with_cities_coo['city']=='Москва', 'expensive_region'] = 1
+df_with_cities_coo.loc[df_with_cities_coo['city']=='Севастополь', 'expensive_region'] = 1
+df_with_cities_coo.loc[df_with_cities_coo['city']=='Санкт-Петербург', 'expensive_region'] = 1
+
 st.write(df_with_cities_coo)
 #Нормализуем числовые признаки
 #nums = df_with_cities_coo.drop(['object_type', 'building_type'], axis=1) 
