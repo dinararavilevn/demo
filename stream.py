@@ -36,7 +36,7 @@ select_object_type = st.sidebar.radio('', ('Вторичное жилье', 'Н�
 if select_object_type == 'Вторичное жилье':
     g = 1
 if select_object_type == 'Новостройка':
-    g = 2
+    g = 11
 
 select_building_type = st.sidebar.selectbox('Выберите тип дома', ('Панельный', 'Монолитый', 'Кирпичный', 'Бетонный', 'Деревянный',  'Другое'))
 if select_building_type == 'Панельный':
@@ -77,7 +77,7 @@ df_with_cities_coo['day_delta'] = (now - first_date).days
 df_with_cities_coo['hour'] = now.hour
 df_with_cities_coo['year'] = now.year
 df_with_cities_coo = add_feature(df_with_cities_coo)
-
+df_with_cities_coo['expensive_region'] = lambda x: 0 if x>0 else 0 if x ==0 else -1
 
 #Нормализуем числовые признаки
 #nums = df_with_cities_coo.drop(['object_type', 'building_type'], axis=1) 
