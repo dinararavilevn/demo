@@ -5,7 +5,7 @@ import datetime
 from model import LightGBM
 from scaler import RobustScaler
 
-#coordinates = pd.read_csv('coordinates.csv')
+coordinates = pd.read_csv('coordinates.csv')
 cities = pd.read_csv('cities.csv')
 
 st.title('Демо-версия сервиса по оценке квартир')
@@ -18,6 +18,7 @@ st.sidebar.info('Заполните форму **Дополнительные п
 
 #with st.form('form'):
 a = st.text_area('Город: ', 'Москва')
+y = st.text_area('Субъект: ', 'Москва')
 b = st.text_area('Общая площадь: ', '50')
 c = st.text_area('Количество комнат: ', '2')
 if show_data == True:
@@ -53,7 +54,7 @@ if select_building_type == 'Другое':
     h = 0
 
 
-data = {'city':  str(a), 'area': float(b), 'rooms': int(c), 'level': int(d), 'levels': int(e), 'kitchen_area': float(f), 'object_type': int(g), 'building_type': int(h)}
+data = {'city':  str(a), 'state': str(y), 'area': float(b), 'rooms': int(c), 'level': int(d), 'levels': int(e), 'kitchen_area': float(f), 'object_type': int(g), 'building_type': int(h)}
 
 def add_feature(data):
     def calc_mean_room_area(data):
@@ -64,7 +65,7 @@ def add_feature(data):
     data['percent_of_level'] = data['level'] / data['levels']
     return data
 
-df = pd.DataFrame (data, columns = ['city','area','rooms', 'level', 'levels', 'kitchen_area', 'object_type', 'building_type'], index=[0])
+df = pd.DataFrame (data, columns = ['city', 'state', 'area','rooms', 'level', 'levels', 'kitchen_area', 'object_type', 'building_type'], index=[0])
 
 #Добавляем координаты по городу
 
