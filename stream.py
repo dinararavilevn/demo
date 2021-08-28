@@ -77,7 +77,7 @@ df_with_cities_coo['day_delta'] = (now - first_date).days
 df_with_cities_coo['hour'] = now.hour
 df_with_cities_coo['year'] = now.year
 df_with_cities_coo = add_feature(df_with_cities_coo)
-if df_with_cities_coo[df_with_cities_coo['city']=='Севастополь'] or df_with_cities_coo[df_with_cities_coo['city']=='Москва'] or df_with_cities_coo[df_with_cities_coo['city']=='Санкт-Петербург']:
+if df_with_cities_coo[(df_with_cities_coo['city']=='Севастополь') | (df_with_cities_coo['city']=='Москва') | (df_with_cities_coo['city']=='Санкт-Петербург')]:
     df_with_cities_coo['expensive_region'] = 1
 else:
     df_with_cities_coo['expensive_region'] = 0
