@@ -80,11 +80,11 @@ df_with_cities_coo = add_feature(df_with_cities_coo)
 st.write(df_with_cities_coo)
 
 #Нормализуем числовые признаки
-nums = df_with_cities_coo.drop(['object_type', 'building_type'], axis=1) 
-scaler = RobustScaler()
-scaled_nums = pd.DataFrame(scaler.get_scaled_data(nums))
+#nums = df_with_cities_coo.drop(['object_type', 'building_type'], axis=1) 
+#scaler = RobustScaler()
+#scaled_nums = pd.DataFrame(scaler.get_scaled_data(nums))
 
-ready_df = pd.concat([scaled_nums, df_with_cities_coo['object_type'], df_with_cities_coo['building_type']], axis=1)
+#ready_df = pd.concat([scaled_nums, df_with_cities_coo['object_type'], df_with_cities_coo['building_type']], axis=1)
 
 model = LightGBM()
 prediction = model.predict_price(ready_df)
