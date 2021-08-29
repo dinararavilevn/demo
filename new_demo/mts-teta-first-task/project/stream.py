@@ -7,13 +7,14 @@ import joblib
 import yaml
 
 
-#def read_yaml(path, levels):
+# def read_yaml(path, levels):
 #    if levels <= 0:
 #        return yaml.safe_load(open(os.path.join(path, "config.yml")))['project']
 #    return read_yaml(os.path.dirname(path), levels - 1)
 
 def read_yaml():
-    return yaml.safe_load(open("config.yml"))['project']
+    return yaml.safe_load(open(os.path.join(os.getcwd(), "config.yml")))['project']
+
 
 def add_feature(data):
     def calc_mean_room_area():
@@ -43,7 +44,7 @@ class Regressor():
 
 
 # coordinates = pd.read_csv('coordinates.csv')
-cities = pd.read_csv("cities.csv")
+cities = pd.read_csv(os.path.join(os.getcwd(), *["data", "cities.csv"]))
 config = read_yaml()
 
 st.title('Демо-версия сервиса по оценке квартир')
@@ -93,7 +94,7 @@ if select_building_type == 'Другое':
     h = 0
 
 df = {'city': str(a), 'area': int(b), 'rooms': int(c), 'level': int(d), 'levels': int(e), 'kitchen_area': int(f),
-        'object_type': int(g), 'building_type': int(h)}
+      'object_type': int(g), 'building_type': int(h)}
 df = pd.DataFrame(df,
                   columns=['city', 'area', 'rooms', 'level', 'levels', 'kitchen_area', 'object_type',
                            'building_type'],
@@ -112,18 +113,17 @@ df_with_coordinates['year'] = now.year
 df_with_coordinates = add_feature(df_with_coordinates)
 # Нормализуем числовые признаки
 # nums = df_with_coordinates.drop(['object_type', 'building_type'], axis=1)
-#scaler = Scaler(config["stream"]["scaler_name"])
-#scaled_data = scaler.get_scaled_data(df_with_coordinates)
+# scaler = Scaler(config["stream"]["scaler_name"])
+# scaled_data = scaler.get_scaled_data(df_with_coordinates)
 
 # ready_df = pd.concat([scaled_nums, df_with_coordinates['object_type'], df_with_coordinates['building_type']], axis=1)
 
 model = Regressor(config["stream"]["algo_name"])
 prediction = model.predict_price(df_with_coordinates)
 
-
 if st.button('Узнать рекомендованную стоимость'):
     # st.markdown('**Рекомендованная цена квартиры**')
-    #st.subheader(np.round(np.exp(prediction[0])))
+    # st.subheader(np.round(np.exp(prediction[0])))
     st.subheader(np.round(prediction[0]))
 else:
     st.write('Нажмите на кнопку, чтобы рассчитать стоимость!')
