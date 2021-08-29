@@ -43,7 +43,8 @@ class Regressor():
 
 
 # coordinates = pd.read_csv('coordinates.csv')
-cities = pd.read_csv("data/cities.csv")
+#cities = pd.read_csv("data/cities.csv")
+cities = pd.read_csv("cities.csv")
 config = read_yaml()
 
 st.title('Демо-версия сервиса по оценке квартир')
