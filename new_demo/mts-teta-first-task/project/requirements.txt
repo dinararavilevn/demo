@@ -1,6 +1,6 @@
 pandas==1.1.5
 numpy==1.19.5
-matplotlib==
+matplotlib==3.4.2
 seaborn==
 pyyaml==
 tqdm==
