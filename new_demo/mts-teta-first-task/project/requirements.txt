@@ -76,3 +76,4 @@ watchdog==2.1.5
 wcwidth==0.2.5
 webencodings==0.5.1
 widgetsnbextension==3.5.1
+yaml==1.2
