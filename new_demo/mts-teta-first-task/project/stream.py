@@ -34,7 +34,7 @@ class Regressor():
         return self.model.predict(data)
 
 
-coordinates = pd.read_csv('data/coordinates.csv')
+coordinates = pd.read_csv('data\coordinates.csv')
 
 st.title('Демо-версия сервиса по оценке квартир')
 st.markdown('**Это демонстрационный вариант**')
