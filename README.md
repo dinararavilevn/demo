@@ -25,3 +25,5 @@ $ cd mts-teta-first-task
 Бейзлайн: [baseline.ipynb](https://github.com/VladimirBorisevich/mts-teta-first-task/blob/main/baseline.ipynb)
 
 Оценка экономического эффекта: [economical_effect.pdf](https://github.com/VladimirBorisevich/mts-teta-first-task/blob/main/economical_effect.pdf)
+
+Демо приложения: https://dinararavilevn-demo-stream-11l60f.streamlit.app/
